@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Apod from './Apod.js';
-import CamerasList from './CamerasList.js';
+import PhotoMetadata from './PhotoMetadata.js';
 
 class ImageContainer extends Component {
 
@@ -8,11 +8,27 @@ class ImageContainer extends Component {
         super();
         this.state = {
             requestFailed: false,
-            uri: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz&api_key=7phZCTQahUxf6mozRCC3nN7AxeZXZNtWOyQv3TT5',
         };
     }
-    componentDidMount(){
-        return fetch(this.state.uri)
+
+    generateUri(){
+        const cameras = [
+            'fhaz',
+            'chemcam',
+            'mahli',
+            'mardi',
+            'rhaz',
+        ];
+
+        let uri = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=';
+        uri += cameras[Math.floor(Math.random() * cameras.length)];
+        uri += '&api_key=7phZCTQahUxf6mozRCC3nN7AxeZXZNtWOyQv3TT5';
+        return uri;
+    }
+
+    fetchData(){
+        //console.log(this.generateUri());
+        return fetch(this.generateUri())
             .then(response => {
                 if (!response.ok)
                 {
@@ -24,7 +40,8 @@ class ImageContainer extends Component {
             .then((d) => {
                 this.setState({
                     photo: d.photos[d.photos.length - 1],
-                    cameras: d.photos[d.photos.length - 1].rover.cameras,
+                    camera: d.photos.length ? d.photos[d.photos.length - 1].camera : null,
+                    roverCameras: d.photos.length ? d.photos[d.photos.length - 1].rover.cameras : null,
                 });
                 return d.photos;
             }), () => {
@@ -34,14 +51,18 @@ class ImageContainer extends Component {
         };
     }
 
+    componentDidMount(){
+        return this.fetchData();
+    }
+
 
     render(){
         if(this.state.requestFailed) return <p>Api request failed</p>
         if(!this.state.photo) return <p>Loading...</p>
         return(
             <div className="ImageContainer">
-                <Apod photo={this.state.photo}/>
-                <CamerasList cameras={this.state.cameras}/>
+                <Apod photo={this.state.photo} onClick={ () => this.fetchData()}/>
+                <PhotoMetadata camera={this.state.camera}/>
             </div>
         );
     }

@@ -35,8 +35,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1275">
-              <caret line="102" column="8" lean-forward="true" selection-start-line="98" selection-start-column="6" selection-end-line="102" selection-end-column="8" />
+            <state relative-caret-position="374">
+              <caret line="22" column="44" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="44" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
                 <element signature="n#!!block;n#calculateWinner#0" expanded="false" />
@@ -46,6 +46,11 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>?</find>
+    </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -227,12 +232,12 @@
       <workItem from="1501355716994" duration="186000" />
       <workItem from="1501356873763" duration="57000" />
       <workItem from="1501360507473" duration="900000" />
-      <workItem from="1501380543303" duration="4187000" />
+      <workItem from="1501380543303" duration="5618000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12003000" />
+    <option name="totallyTimeSpent" value="13434000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -421,8 +426,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="102" column="8" lean-forward="true" selection-start-line="98" selection-start-column="6" selection-end-line="102" selection-end-column="8" />
+        <state relative-caret-position="374">
+          <caret line="22" column="44" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="44" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
             <element signature="n#!!block;n#calculateWinner#0" expanded="false" />
