@@ -7,10 +7,11 @@ class Apod extends Component {
 
         return(
             <div className="Apod">
-                <img
-                    src={ photo.img_src }
-                    alt="logo">
-                </img>
+              <p>Camera: {photo.camera.full_name}</p>
+              <img
+                  src={ photo.img_src }
+                  alt="logo">
+              </img>
             </div>
         );
     }

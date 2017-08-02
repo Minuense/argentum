@@ -20,8 +20,23 @@ class ImageContainer extends Component {
             'rhaz',
         ];
 
-        let uri = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=';
-        uri += cameras[Math.floor(Math.random() * cameras.length)];
+        var today = new Date();
+        var dd = today.getDate() - 30;
+        var mm = today.getMonth()+1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        /*if(dd<10){
+            dd='0'+dd;
+        }
+        if(mm<10){
+            mm='0'+mm;
+        }*/
+        var today = yyyy + '-' + mm + '-' + dd;
+
+        let uri = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?';
+        //uri += 'earth_date=' + today;
+        uri += 'sol=' + 1100;
+        uri += '&camera=' + cameras[Math.floor(Math.random() * cameras.length)];
         uri += '&api_key=7phZCTQahUxf6mozRCC3nN7AxeZXZNtWOyQv3TT5';
         return uri;
     }
@@ -38,31 +53,29 @@ class ImageContainer extends Component {
             })
             .then((d) => d.json())
             .then((d) => {
-                this.setState({
-                    photo: d.photos[d.photos.length - 1],
-                    camera: d.photos.length ? d.photos[d.photos.length - 1].camera : null,
-                    roverCameras: d.photos.length ? d.photos[d.photos.length - 1].rover.cameras : null,
-                });
-                return d.photos;
-            }), () => {
-            this.setState({
-                requestFailed: true
-            })
-        };
+                if(d.photos.length > 0){
+                    this.setState({
+                        photo: d.photos[d.photos.length - 1],
+                        camera: d.photos.length ? d.photos[d.photos.length - 1].camera : null,
+                        roverCameras: d.photos.length ? d.photos[d.photos.length - 1].rover.cameras : null,
+                    });
+                    return d.photos;
+                }
+                else{
+                    return this.fetchData();
+                }
+           })
     }
 
     componentDidMount(){
         return this.fetchData();
     }
-
-
     render(){
         if(this.state.requestFailed) return <p>Api request failed</p>
         if(!this.state.photo) return <p>Loading...</p>
         return(
             <div className="ImageContainer">
-                <Apod photo={this.state.photo} onClick={ () => this.fetchData()}/>
-                <PhotoMetadata camera={this.state.camera}/>
+                <Apod photo={this.state.photo} onClick={this.fetchData.bind(this)}/>
             </div>
         );
     }
