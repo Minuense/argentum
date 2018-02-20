@@ -13,7 +13,7 @@ class ImageContainer extends Component {
 
     fetchData(){
         //console.log(this.generateUri());
-        return fetch("http://localhost:3048/api/apod")
+        return fetch("https://mirrodin.azurewebsites.net/api/apod")
             .then(response => {
                 if (!response.ok)
                 {
